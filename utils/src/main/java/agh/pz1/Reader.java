@@ -17,9 +17,10 @@ public class Reader extends Thread {
     public void run() {
       try {
         logger("In queue");
+
         library.readerEnter();
-        logger("Reading");
         sleep(5000);
+
         logger("Leaving");
         library.readerExit();
       } catch (InterruptedException e) {

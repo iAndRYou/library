@@ -17,9 +17,10 @@ public class Writer extends Thread {
     public void run() {
       try {
         logger("In queue");
+
         library.writerEnter();
-        logger("Writing");
         sleep(5000);
+
         logger("Leaving");
         library.writerExit();
       } catch (InterruptedException e) {
