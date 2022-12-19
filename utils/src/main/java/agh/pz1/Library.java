@@ -123,10 +123,17 @@ public class Library {
      * Prints the current status of the lib.
      */
     private void log() {
-        System.out.println("Status:");
-        System.out.println("Queue - readers: " + readersInQueueCount + ", writers: " + writersInQueueCount);
-        System.out.println("Library - readers: " + readersCount + ", writers: " + writersCount);
-        System.out.println();
+        logger("Status:");
+        logger("Queue - readers: " + readersInQueueCount + ", writers: " + writersInQueueCount);
+        logger("Library - readers: " + readersCount + ", writers: " + writersCount);
+        logger("");
+    }
+
+    /**
+     * Prints the message to the console.
+     */
+    private void logger(String message) {
+        System.out.println(message);
     }
 
     /**

@@ -2,6 +2,7 @@ package agh.pz1;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 /**
  * The main class of the program.
@@ -35,7 +36,7 @@ public class Solution {
             createVisitors(readersCount, writersCount, visitors);
             initialiseVisitors(visitors);
         } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("Default values used: 10 readers, 3 writers.");
+            logger("Default values used: 10 readers, 3 writers.");
             int readersCount = 10;
             int writersCount = 3;
             createVisitors(readersCount, writersCount, visitors);
@@ -49,8 +50,9 @@ public class Solution {
      * Creates all readers and writers and shuffles them.
      * @param readersCount the number of readers
      * @param writersCount the number of writers
+     * @param visitors the list of all readers and writers
      */
-    public static void createVisitors(int readersCount, int writersCount, ArrayList<Thread> visitors) {
+    public static void createVisitors(int readersCount, int writersCount, List<Thread> visitors) {
         for (int i = 0; i < readersCount; i++) {
             visitors.add(new Reader(lib, i+1));
         }
@@ -63,9 +65,10 @@ public class Solution {
     /**
      * Starts all readers and writers. 
      * Delay of 500ms between each one.
-     * @throws InterruptedException
+     * @param visitors the list of all readers and writers
+     * @throws InterruptedException if the main thread is interrupted
      */
-    public static void initialiseVisitors(ArrayList<Thread> visitors) throws InterruptedException {
+    public static void initialiseVisitors(List<Thread> visitors) throws InterruptedException {
         try {
             for (Thread visitor : visitors) {
                 Thread.sleep(500);
@@ -74,5 +77,12 @@ public class Solution {
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }
+    }
+
+    /**
+     * Prints the message to the console.
+     */
+    private static void logger(String message) {
+        System.out.println(message);
     }
 }
