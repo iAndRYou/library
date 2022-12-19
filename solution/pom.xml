@@ -37,7 +37,7 @@
                     </descriptorRefs>
                     <archive>
                         <manifest>
-                            <mainClass>agh.pz1.Client</mainClass>
+                            <mainClass>agh.pz1.Solution</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
