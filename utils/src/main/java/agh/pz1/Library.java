@@ -54,7 +54,7 @@ public class Library {
     /**
      * The method called by a reader when he wants to enter the library.
      * He has to wait for his turn in the queue and then for the library to be free.
-     * @throws InterruptedException
+     * @throws InterruptedException if the reader thread is interrupted
      */
     public void readerEnter() throws InterruptedException {
         readersInQueueCount++;
@@ -76,7 +76,7 @@ public class Library {
 
     /**
      * The method called by a reader when he wants to leave the library.
-     * @throws InterruptedException
+     * @throws InterruptedException if the reader thread is interrupted
      */
     public void readerExit() throws InterruptedException {
         readerAction.acquire();
@@ -92,7 +92,7 @@ public class Library {
     /**
      * The method called by a writer when he wants to enter the library.
      * He has to wait for his turn in the queue and then for the library to be free.
-     * @throws InterruptedException
+     * @throws InterruptedException if the writer thread is interrupted
      */
     public void writerEnter() throws InterruptedException {
         writersInQueueCount++;
