@@ -9,7 +9,7 @@ import java.util.Collections;
  * @author Andrzej Kmiecik
  * @version 1.0
  */
-public class Solution {
+class Solution {
 
     /**
      * The lib object.
@@ -26,8 +26,9 @@ public class Solution {
      * The main method of the program.
      * Creates all readers and writers and starts them.
      * @param args the number of readers and writers respectively read from commandline: [readersCount] [writersCount]
+     * @throws InterruptedException
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         try {
             int readersCount = Integer.parseInt(args[0]);
             int writersCount = Integer.parseInt(args[1]);
@@ -60,8 +61,9 @@ public class Solution {
     /**
      * Starts all readers and writers. 
      * Delay of 500ms between each one.
+     * @throws InterruptedException
      */
-    private static void initialiseVisitors() {
+    private static void initialiseVisitors() throws InterruptedException {
         try {
             for (Thread visitor : visitors) {
                 Thread.sleep(500);
@@ -69,6 +71,7 @@ public class Solution {
             }
         } catch (InterruptedException e) {
             e.printStackTrace();
+            throw e;
         }
     }
 }

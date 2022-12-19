@@ -5,7 +5,7 @@ import java.security.SecureRandom;
 /**
  * The class representing a reader.
  */
-public class Reader extends Thread {
+class Reader extends Thread {
 
     /**
      * Random object for generating random numbers.
@@ -61,7 +61,6 @@ public class Reader extends Thread {
           lib.readerExit();
         } catch (InterruptedException e) {
           e.printStackTrace();
-          throw new RuntimeException(e);
         }
       }
     }
