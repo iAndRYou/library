@@ -1,5 +1,8 @@
 package agh.pz1;
 
+/**
+ * The class representing a reader.
+ */
 public class Reader extends Thread {
     /**
      * Library where the reader will be reading.

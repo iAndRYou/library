@@ -3,6 +3,12 @@ package agh.pz1;
 import java.util.ArrayList;
 import java.util.Collections;
 
+/**
+ * The main class of the program.
+ * Creates all readers and writers and starts them.
+ * @author Andrzej Kmiecik
+ * @version 1.0
+ */
 public class Solution {
 
     /**

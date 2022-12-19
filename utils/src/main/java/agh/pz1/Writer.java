@@ -1,7 +1,17 @@
 package agh.pz1;
 
+/**
+ * The class representing a writer.
+ */
 public class Writer extends Thread {
+    /**
+     * Library where the writer will be reading.
+     */
     private Library library;
+
+    /**
+     * Id of the writer.
+     */
     private int id;
 
     /**

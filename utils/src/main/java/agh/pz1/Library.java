@@ -2,6 +2,10 @@ package agh.pz1;
 
 import java.util.concurrent.Semaphore;
 
+/**
+ * The class representing a library.
+ * It handles all the logic of the readers-writers problem.
+ */
 public class Library {
     /**
      * The number of readers currently in the library.
