@@ -15,7 +15,7 @@ public class Solution {
      * The lib object.
      * Handles all the lib logic.
      */
-    public static Library lib = new Library();
+    static final Library lib = new Library();
 
     /**
      * The list of all readers and writers.
@@ -26,7 +26,7 @@ public class Solution {
      * The main method of the program.
      * Creates all readers and writers and starts them.
      * @param args the number of readers and writers respectively read from commandline: [readersCount] [writersCount]
-     * @throws InterruptedException
+     * @throws InterruptedException if the main thread is interrupted
      */
     public static void main(String[] args) throws InterruptedException {
         try {
@@ -34,12 +34,14 @@ public class Solution {
             int writersCount = Integer.parseInt(args[1]);
             createVisitors(readersCount, writersCount);
             initialiseVisitors();
-        } catch (Exception e) {
+        } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("Default values used: 10 readers, 3 writers.");
             int readersCount = 10;
             int writersCount = 3;
             createVisitors(readersCount, writersCount);
             initialiseVisitors();
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
         }
     }
 
@@ -70,8 +72,7 @@ public class Solution {
                 visitor.start();
             }
         } catch (InterruptedException e) {
-            e.printStackTrace();
-            throw e;
+            Thread.currentThread().interrupt();
         }
     }
 }

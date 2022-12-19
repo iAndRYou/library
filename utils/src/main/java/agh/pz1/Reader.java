@@ -60,7 +60,6 @@ class Reader extends Thread {
           logger("Leaving");
           lib.readerExit();
         } catch (InterruptedException e) {
-          e.printStackTrace();
           Thread.currentThread().interrupt();
         }
       }

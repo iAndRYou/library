@@ -60,7 +60,6 @@ class Writer extends Thread {
           logger("Leaving");
           lib.writerExit();
         } catch (InterruptedException e) {
-          e.printStackTrace();
           Thread.currentThread().interrupt();
         }
       }
