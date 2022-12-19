@@ -61,6 +61,7 @@ class Writer extends Thread {
           lib.writerExit();
         } catch (InterruptedException e) {
           e.printStackTrace();
+          Thread.currentThread().interrupt();
         }
       }
     }

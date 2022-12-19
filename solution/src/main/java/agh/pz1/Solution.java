@@ -9,7 +9,7 @@ import java.util.Collections;
  * @author Andrzej Kmiecik
  * @version 1.0
  */
-class Solution {
+public class Solution {
 
     /**
      * The lib object.
