@@ -2,7 +2,7 @@ package agh.pz1;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class ReaderTest {
+public class ReaderTest {
     private final Library lib = new Library();
 
     @org.junit.jupiter.api.Test

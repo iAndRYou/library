@@ -5,12 +5,12 @@ import java.security.SecureRandom;
 /**
  * The class representing a reader.
  */
-class Reader extends Thread {
+public class Reader extends Thread {
 
     /**
      * Random object for generating random numbers.
      */
-    private SecureRandom random = new SecureRandom();
+    SecureRandom random = new SecureRandom();
     
     /**
      * Library where the reader will be reading.

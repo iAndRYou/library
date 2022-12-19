@@ -10,7 +10,7 @@ class Writer extends Thread {
     /**
      * Random object for generating random numbers.
      */
-    private SecureRandom random = new SecureRandom();
+    SecureRandom random = new SecureRandom();
     
     /**
      * Library where the writer will be reading.

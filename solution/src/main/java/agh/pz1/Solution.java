@@ -15,7 +15,7 @@ public class Solution {
      * The lib object.
      * Handles all the lib logic.
      */
-    static final Library lib = new Library();
+    static Library lib = new Library();
 
     /**
      * The list of all readers and writers.
@@ -32,14 +32,14 @@ public class Solution {
         try {
             int readersCount = Integer.parseInt(args[0]);
             int writersCount = Integer.parseInt(args[1]);
-            createVisitors(readersCount, writersCount);
-            initialiseVisitors();
+            createVisitors(readersCount, writersCount, visitors);
+            initialiseVisitors(visitors);
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("Default values used: 10 readers, 3 writers.");
             int readersCount = 10;
             int writersCount = 3;
-            createVisitors(readersCount, writersCount);
-            initialiseVisitors();
+            createVisitors(readersCount, writersCount, visitors);
+            initialiseVisitors(visitors);
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }
@@ -50,7 +50,7 @@ public class Solution {
      * @param readersCount the number of readers
      * @param writersCount the number of writers
      */
-    private static void createVisitors(int readersCount, int writersCount) {
+    public static void createVisitors(int readersCount, int writersCount, ArrayList<Thread> visitors) {
         for (int i = 0; i < readersCount; i++) {
             visitors.add(new Reader(lib, i+1));
         }
@@ -65,7 +65,7 @@ public class Solution {
      * Delay of 500ms between each one.
      * @throws InterruptedException
      */
-    private static void initialiseVisitors() throws InterruptedException {
+    public static void initialiseVisitors(ArrayList<Thread> visitors) throws InterruptedException {
         try {
             for (Thread visitor : visitors) {
                 Thread.sleep(500);
