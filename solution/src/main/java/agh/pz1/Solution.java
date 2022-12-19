@@ -12,10 +12,10 @@ import java.util.Collections;
 public class Solution {
 
     /**
-     * The library object.
-     * Handles all the library logic.
+     * The lib object.
+     * Handles all the lib logic.
      */
-    public static Library library = new Library();
+    public static Library lib = new Library();
 
     /**
      * The list of all readers and writers.
@@ -49,10 +49,10 @@ public class Solution {
      */
     private static void createVisitors(int readersCount, int writersCount) {
         for (int i = 0; i < readersCount; i++) {
-            visitors.add(new Reader(library, i+1));
+            visitors.add(new Reader(lib, i+1));
         }
         for (int i = 0; i < writersCount; i++) {
-            visitors.add(new Writer(library, i+1));
+            visitors.add(new Writer(lib, i+1));
         }
         Collections.shuffle(visitors);
     }

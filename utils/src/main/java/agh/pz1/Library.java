@@ -3,17 +3,18 @@ package agh.pz1;
 import java.util.concurrent.Semaphore;
 
 /**
- * The class representing a library.
+ * The class representing a lib.
  * It handles all the logic of the readers-writers problem.
  */
 public class Library {
+
     /**
-     * The number of readers currently in the library.
+     * The number of readers currently in the lib.
      */
     private int readersCount = 0;
 
     /**
-     * The number of writers currently in the library.
+     * The number of writers currently in the lib.
      */
     private int writersCount = 0;
 
@@ -34,26 +35,26 @@ public class Library {
     private Semaphore readerAction = new Semaphore(1);
 
     /**
-     * The semaphore controlling the access to the library.
-     * Only one writer can enter the library given that there are no readers in the library.
+     * The semaphore controlling the access to the lib.
+     * Only one writer can enter the lib given that there are no readers in the lib.
      */
-    private Semaphore library = new Semaphore(1);
+    private Semaphore lib = new Semaphore(1);
 
     /**
      * The semaphore controlling who is the first in queue/
-     * The first in queue can enter the library.
+     * The first in queue can enter the lib.
      */
     private Semaphore queue = new Semaphore(1);
 
     /**
-     * The semaphore controlling the capacity of the library.
-     * The library can hold up to 5 readers at the same time.
+     * The semaphore controlling the capacity of the lib.
+     * The lib can hold up to 5 readers at the same time.
      */
     private Semaphore capacity = new Semaphore(5);
 
     /**
-     * The method called by a reader when he wants to enter the library.
-     * He has to wait for his turn in the queue and then for the library to be free.
+     * The method called by a reader when he wants to enter the lib.
+     * He has to wait for his turn in the queue and then for the lib to be free.
      * @throws InterruptedException if the reader thread is interrupted
      */
     public void readerEnter() throws InterruptedException {
@@ -66,7 +67,7 @@ public class Library {
         readersInQueueCount--;
         readersCount++;
         if (readersCount == 1) {
-            library.acquire();
+            lib.acquire();
         }
 
         log();
@@ -75,23 +76,26 @@ public class Library {
     }
 
     /**
-     * The method called by a reader when he wants to leave the library.
+     * The method called by a reader when he wants to leave the lib.
      * @throws InterruptedException if the reader thread is interrupted
      */
     public void readerExit() throws InterruptedException {
         readerAction.acquire();
-
-        readersCount--;
-        if (readersCount == 0) {
-            library.release();
+        
+        if (readersCount > 0) {
+            readersCount--;
+            if (readersCount == 0) {
+                lib.release();
+            }
         }
+
         readerAction.release();
         capacity.release();
     }
 
     /**
-     * The method called by a writer when he wants to enter the library.
-     * He has to wait for his turn in the queue and then for the library to be free.
+     * The method called by a writer when he wants to enter the lib.
+     * He has to wait for his turn in the queue and then for the lib to be free.
      * @throws InterruptedException if the writer thread is interrupted
      */
     public void writerEnter() throws InterruptedException {
@@ -99,7 +103,7 @@ public class Library {
         Thread.sleep(5);
 
         queue.acquire();
-        library.acquire();
+        lib.acquire();
         writersInQueueCount--;
         writersCount++;
 
@@ -108,20 +112,52 @@ public class Library {
     }
 
     /**
-     * The method called by a writer when he wants to leave the library.
+     * The method called by a writer when he wants to leave the lib.
      */
     public void writerExit() {
         writersCount--;
-        library.release();
+        lib.release();
     }
 
     /**
-     * Prints the current status of the library.
+     * Prints the current status of the lib.
      */
     private void log() {
         System.out.println("Status:");
         System.out.println("Queue - readers: " + readersInQueueCount + ", writers: " + writersInQueueCount);
         System.out.println("Library - readers: " + readersCount + ", writers: " + writersCount);
         System.out.println();
+    }
+
+    /**
+     * Gets the number of readers currently in the lib.
+     * @return the readersCount
+     */
+    public int getReadersCount() {
+        return readersCount;
+    }
+
+    /**
+     * Gets the number of writers currently in the lib.
+     * @return the writersCount
+     */
+    public int getWritersCount() {
+        return writersCount;
+    }
+
+    /**
+     * Gets the number of readers currently in the queue.
+     * @return the readersInQueueCount
+     */
+    public int getReadersInQueueCount() {
+        return readersInQueueCount;
+    }
+
+    /**
+     * Gets the number of writers currently in the queue.
+     * @return the writersInQueueCount
+     */
+    public int getWritersInQueueCount() {
+        return writersInQueueCount;
     }
 }

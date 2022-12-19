@@ -1,13 +1,21 @@
 package agh.pz1;
 
+import java.security.SecureRandom;
+
 /**
  * The class representing a writer.
  */
 public class Writer extends Thread {
+
+    /**
+     * Random object for generating random numbers.
+     */
+    private SecureRandom random = new SecureRandom();
+    
     /**
      * Library where the writer will be reading.
      */
-    private Library library;
+    private Library lib;
 
     /**
      * Id of the writer.
@@ -17,11 +25,11 @@ public class Writer extends Thread {
     /**
      * Constructor for Writer class object.
      * Extends Thread class for multithreaded implementation of readers-writers problem.
-     * @param givenLibrary - library where the writer will be reading
+     * @param givenLibrary - lib where the writer will be reading
      * @param givenId - id of the writer
      */
     public Writer(Library givenLibrary, int givenId) {
-      this.library = givenLibrary;
+      this.lib = givenLibrary;
       this.id = givenId;
     }
 
@@ -42,13 +50,18 @@ public class Writer extends Thread {
         try {
           logger("In queue");
 
-          library.writerEnter();
-          sleep(5000);
+          lib.writerEnter();
+
+          int time = random.ints(1000, 3000)
+            .findFirst()
+            .getAsInt();
+          sleep(time);
 
           logger("Leaving");
-          library.writerExit();
+          lib.writerExit();
         } catch (InterruptedException e) {
           e.printStackTrace();
+          throw new RuntimeException(e);
         }
       }
     }
