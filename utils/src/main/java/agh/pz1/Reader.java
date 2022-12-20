@@ -46,7 +46,9 @@ public class Reader extends Thread {
      */
     @Override
     public void run() {
-      for (int i = 0; i < 3; i++) {
+      long startTime = System.currentTimeMillis();
+      long endTime = startTime + 30 * 1000; 
+      while (System.currentTimeMillis() < endTime) {
         try {
           logger("In queue");
 
